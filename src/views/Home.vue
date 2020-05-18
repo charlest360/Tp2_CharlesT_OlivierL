@@ -1,15 +1,17 @@
 <template>
   <div class="page">
-    
-        <div>
-          
+        <div class ="buttonMenu">
+          <div class="connectionButtons">
+            <button id="signupButton" class="static" v-bind:class='{ hidden: isLoggedIn}'  @click="login"> Sign up</button>
+            <button id="loginButton" class="static" v-bind:class='{ hidden: isLoggedIn}'  @click="login"> Login</button>
+            <button id="profileButton" class="static" v-bind:class='{ hidden: isLoggedIn ==false}'  @click="login"> Profile</button>
+            <button id="logoutButton" class="static" v-bind:class='{ hidden: isLoggedIn ==false}'  @click="login"> Logout</button>
+          </div>
         </div>
         <div id=searchBar >
           <span class="static" v-bind:class='{ hidden: isClicked}' >Search a movie by keyword: <input id="searchBox" v-model="filterName" /></span> 
           <button  id="searchButton" class="static" v-bind:class='{ hidden: isClicked}'  @click="setIsClicked"> Search</button>
           <button  id="searchButton" class="static" v-bind:class='{ hidden: isClicked ==false }' @click="setIsClicked"> Back</button>
-          <button id="loginButton" class="static" v-bind:class='{ hidden: isLoggedIn}'  @click="login"> Login</button>
-          <button id="logoutButton" class="static" v-bind:class='{ hidden: isLoggedIn ==false}'  @click="login"> Logout</button>
         </div>
         
         <div class="actualPage">
@@ -108,7 +110,7 @@ export default {
 
 <style scoped>
   #searchBar{
-    vertical-align: bottom;
+  vertical-align: bottom;
   background-color: #E6B91E;
   color: black;
   width: 110%;
@@ -119,8 +121,17 @@ export default {
   padding-bottom: 15px;
   
   }
+  
+  .connectionButtons {
+    display: inline-block;
+    padding-top: 15px;
+    background-color: #E6B91E;
+    width:100%;
+  }
   #loginButton{
-    margin-left: 12%;
+    
+    
+    float: right;
     width: 8%;
     padding: 10px 40px 10px 40px;
     font-weight: bold;
@@ -128,8 +139,23 @@ export default {
     background-color: black;
   }
   #logoutButton{
+
+    
+    float: right;
     width: 8%;
-    margin-left: 12%;
+    padding: 10px 40px 10px 40px;
+    font-weight: bold;
+    color: #E6B91E;
+    background-color: black;
+  }
+  #signupButton{
+    padding: 10px 40px 10px 40px;
+    font-weight: bold;
+    color: #E6B91E;
+    background-color: black;
+    
+  }
+  #profileButton{
     padding: 10px 40px 10px 40px;
     font-weight: bold;
     color: #E6B91E;
