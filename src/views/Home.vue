@@ -1,11 +1,15 @@
 <template>
   <div class="page">
     
-     
-        <div id=searchBar>
+        <div>
+          
+        </div>
+        <div id=searchBar >
           <span class="static" v-bind:class='{ hidden: isClicked}' >Search a movie by keyword: <input id="searchBox" v-model="filterName" /></span> 
-          <button  id="searchButton" class=" static" v-bind:class='{ hidden: isClicked}'  @click="setIsClicked"> Search</button>
+          <button  id="searchButton" class="static" v-bind:class='{ hidden: isClicked}'  @click="setIsClicked"> Search</button>
           <button  id="searchButton" class="static" v-bind:class='{ hidden: isClicked ==false }' @click="setIsClicked"> Back</button>
+          <button id="loginButton" class="static" v-bind:class='{ hidden: isLoggedIn}'  @click="login"> Login</button>
+          <button id="logoutButton" class="static" v-bind:class='{ hidden: isLoggedIn ==false}'  @click="login"> Logout</button>
         </div>
         
         <div class="actualPage">
@@ -52,7 +56,8 @@ export default {
       filmsData: null,
       error: null,
       filterName : '',
-      isClicked : false
+      isClicked : false,
+      isLoggedIn : false
     }
   },
   created () {
@@ -76,6 +81,15 @@ export default {
       else {
         this.isClicked = true;
       }
+    },
+    login(){
+      if(this.isLoggedIn == true){
+        this.isLoggedIn =false;
+      }
+      else {
+        this.isLoggedIn = true
+      }
+      
     }
   },
   computed: {
@@ -104,6 +118,22 @@ export default {
   padding-top: 15px;
   padding-bottom: 15px;
   
+  }
+  #loginButton{
+    margin-left: 12%;
+    width: 8%;
+    padding: 10px 40px 10px 40px;
+    font-weight: bold;
+    color: #E6B91E;
+    background-color: black;
+  }
+  #logoutButton{
+    width: 8%;
+    margin-left: 12%;
+    padding: 10px 40px 10px 40px;
+    font-weight: bold;
+    color: #E6B91E;
+    background-color: black;
   }
   #searchBox{
     width: 30%;
