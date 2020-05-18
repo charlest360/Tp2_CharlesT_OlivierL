@@ -4,21 +4,11 @@
             <span>Loading</span>
         </section>
         <section v-else>
-            
-            <div id=searchBar>
-                <span class="static" v-bind:class='{ hidden: isClicked}' >Search a movie by keyword: <input id="searchBox" v-model="filterName" /></span> 
-                <button  id="searchButton" class=" static" v-bind:class='{ hidden: isClicked}'  @click="setIsClicked"> Search</button>
-                <button  id="searchButton" class="static" v-bind:class='{ hidden: isClicked ==false }' @click="setIsClicked"> Back</button>
-            </div>
+            <buttons-menu />
+            <search-bar />
                 
             <div id="filmPage">
-                <section class="static" v-bind:class='{ hidden: shouldClose ==true }'>
-                    <film-suggestion-list :keyword="filterName" />
-                </section>
-                
-                <section class="static" v-bind:class='{ hidden: isClicked == false }' >
-                    <film-list :keyword="filterName" :clicked="isClicked" />
-                 </section>
+            
                 
                 <section>
                     <ul class="static" v-bind:class='{ hidden: isClicked}' id="filmData">
@@ -56,8 +46,6 @@
 </template>
 
 <script>
-import FilmSuggestionList from '@/components/FilmSuggestionList.vue';
-import FilmList from '@/components/FilmList.vue';
 import FilmService from '@/services/FilmService.js';
 import FilmActors from '@/components/FilmActors.vue';
 import FilmImage from '@/components/FilmImage.vue';
@@ -67,10 +55,10 @@ import FilmReviewDisplay from '@/components/FilmReviewDisplay.vue';
 import FilmDescription from '@/components/FilmDescription.vue';
 import FilmRanking from '@/components/FilmRanking.vue';
 import FilmLength from '@/components/FilmLength.vue';
+import ButtonsMenu from '@/components/ButtonsMenu.vue';
+import SearchBar from '@/components/SearchBar.vue';
     export default {
         components: {
-            FilmSuggestionList,
-            FilmList,
             FilmActors,
             FilmImage,
             FilmTitle,
@@ -78,7 +66,9 @@ import FilmLength from '@/components/FilmLength.vue';
             FilmReviewDisplay,
             FilmDescription,
             FilmRanking,
-            FilmLength
+            FilmLength,
+            ButtonsMenu,
+            SearchBar
         },
         props: {
             id: {
@@ -193,7 +183,7 @@ ul
     vertical-align: bottom;
   background-color: #E6B91E;
   color: black;
-  width: 110%;
+  width: 100%;
   font-weight: bold;
   font-size: 20px;;
   display: inline-block;
