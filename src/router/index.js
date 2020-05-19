@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import FilmPage from '../views/FilmPage.vue';
+import Account from '../views/Account.vue';
 
 Vue.use(VueRouter)
 
@@ -30,7 +31,14 @@ Vue.use(VueRouter)
     meta: {
       title : 'Show movie page - OMDb '
     }
-    },
+  },
+  {
+    path: '/users/profile/:buttonClicked',
+    name: 'Account',
+    component: Account,
+    props: true,
+      
+  },
 ]
 
 const router = new VueRouter({

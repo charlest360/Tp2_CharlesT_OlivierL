@@ -1,9 +1,9 @@
 <template>
     <div class ="buttonMenu">
           <div class="connectionButtons">
-            <button id="signupButton" class="static" v-bind:class='{ hidden: isLoggedIn}'  @click="login"> Sign up</button>
-            <button id="loginButton" class="static" v-bind:class='{ hidden: isLoggedIn}'  @click="login"> Login</button>
-            <button id="profileButton" class="static" v-bind:class='{ hidden: isLoggedIn ==false}'  @click="login"> Profile</button>
+            <button id="signupButton" class="static" v-bind:class='{ hidden: isLoggedIn}'  @click="profile('signUp')"> Sign up</button>
+            <button id="loginButton" class="static" v-bind:class='{ hidden: isLoggedIn}'  @click="login()"> Login</button>
+            <button id="profileButton" class="static" v-bind:class='{ hidden: isLoggedIn ==false}'  @click="profile('profile')"> Profile</button>
             <button id="logoutButton" class="static" v-bind:class='{ hidden: isLoggedIn ==false}'  @click="login"> Logout</button>
           </div>
         </div>
@@ -25,6 +25,12 @@ export default {
         this.isLoggedIn = true
       }
       
+      
+    },
+    profile(button) {
+      this.$router.push('/users/profile/'+button);
+      this.$router.go();
+            
     }
   },
 }
