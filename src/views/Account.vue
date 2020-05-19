@@ -1,12 +1,23 @@
 <template>
     <div class="accountContent">
-        <h1 class="static" v-bind:class='{ hidden: buttonClicked == "profile"}'>Create an account</h1>
-        <h1 class="static" v-bind:class='{ hidden: buttonClicked == "signUp"}' >Modify an account</h1>
+        <div v-bind:class='{ hidden: buttonClicked == "profile"}'>
+            <h1 class="static" >Create an account</h1>
+            <create-account />
+        </div>
+        <div v-bind:class='{ hidden: buttonClicked == "signUp"}' >
+            <h1 class="static">Modify an account</h1>
+        </div>
+        
+        
     </div>
 </template>
 
 <script>
+import CreateAccount from '@/components/CreateAccount.vue';
     export default {
+        components: {
+            CreateAccount,
+        },
         props: {
             buttonClicked: {
                 type: String,
@@ -20,5 +31,8 @@
 <style scoped>
     .hidden {
         display: none;
+    }
+    .accountContent{
+        color: black;
     }
 </style>

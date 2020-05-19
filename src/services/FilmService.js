@@ -25,5 +25,11 @@ const apiFilms = axios.create({
     },
     getFilmsByKeyword(keyword,pageNb) {
       return apiFilms.get('/films?keyword='+keyword+'&page='+pageNb);
+    },
+    createNewUser(data){
+      return apiFilms.post('/users',data) ;
+    },
+    checkUserLoginExists(login){
+      return apiFilms.get('/users/'+login+'/verify')
     }
   }
