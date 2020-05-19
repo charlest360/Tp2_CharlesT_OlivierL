@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import FilmPage from '../views/FilmPage.vue';
 import Account from '../views/Account.vue';
+import Login from '../views/Login.vue';
 
 Vue.use(VueRouter)
 
@@ -37,6 +38,12 @@ Vue.use(VueRouter)
     name: 'Account',
     component: Account,
     props: true,
+      
+  },
+  {
+    path: '/users/Login',
+    name: 'Login',
+    component: Login,
       
   },
 ]

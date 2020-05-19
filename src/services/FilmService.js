@@ -30,6 +30,9 @@ const apiFilms = axios.create({
       return apiFilms.post('/users',data) ;
     },
     checkUserLoginExists(login){
-      return apiFilms.get('/users/'+login+'/verify')
+      return apiFilms.get('/users/'+login+'/verify');
+    },
+    userLogin(data){
+      return apiFilms.post('users/login',data);
     }
   }

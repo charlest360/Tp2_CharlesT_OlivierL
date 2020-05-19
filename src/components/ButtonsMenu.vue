@@ -23,15 +23,16 @@ export default {
       }
       else {
         this.isLoggedIn = true
+        this.$router.push('/users/Login');
+        this.$router.go();
       }
       
       
     },
     profile(button) {
       this.$router.push('/users/profile/'+button);
-      this.$router.go();
-            
-    }
+      this.$router.go();       
+    },
   },
 }
 </script>
