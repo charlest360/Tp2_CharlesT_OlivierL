@@ -7,6 +7,7 @@ const apiFilms = axios.create({
       'Content-Type': 'application/json'
     }
   })
+  
 
   
 
@@ -33,6 +34,43 @@ const apiFilms = axios.create({
       return apiFilms.get('/users/'+login+'/verify');
     },
     userLogin(data){
-      return apiFilms.post('users/login',data);
-    }
+      return apiFilms.post('/users/login',data);
+    },
+    editUser(id,data,token){
+      let apiFilmToken = axios.create({  
+        baseURL: `http://radiant-plains-67953.herokuapp.com/api`,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer '+token
+        }
+      })
+      return apiFilmToken.put('/users/'+id,data) ;
+    },
+    editUserPassword(id,data,token){
+      let apiFilmToken = axios.create({  
+        baseURL: `http://radiant-plains-67953.herokuapp.com/api`,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer '+token
+        }
+      })
+      return apiFilmToken.put('/users/'+id+'/password',data) ;
+    },
+    getUserInfos(id,token) {
+      let apiFilmToken = axios.create({  
+        baseURL: `http://radiant-plains-67953.herokuapp.com/api`,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer '+token
+        }
+      })
+      
+      
+      return apiFilmToken.get('/users/'+id) ;
+    },
+
+
   }

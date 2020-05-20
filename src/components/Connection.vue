@@ -70,6 +70,7 @@ import FilmService from '@/services/FilmService.js';
                     this.error = error;
                     });
                    
+                   
                         
                 }
                 
@@ -83,7 +84,7 @@ import FilmService from '@/services/FilmService.js';
                     localStorage.setItem('username',this.login);
                     setTimeout(function(){
                         window.location.href = localStorage.getItem('backURL');
-                    }, 4000)
+                    }, 2000)
                 }
             },
             validateData() {

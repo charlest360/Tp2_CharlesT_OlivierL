@@ -1,5 +1,8 @@
 <template>
     <div class="createAccountForm">
+        <div v-if="error != null">
+             <span>Erreur : {{error}}</span>
+        </div>
         <div v-if="response != null">
             <span> Account created!</span>
         </div>
@@ -120,7 +123,7 @@ import FilmService from '@/services/FilmService.js';
                         password : this.password,
                         email : this.email,
                         last_name: this.lastName,
-                        first_name: this.lastName
+                        first_name: this.firstName
                     }
                     FilmService.createNewUser(data)
                     .then(response => {
