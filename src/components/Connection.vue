@@ -1,13 +1,14 @@
 <template>
     <div class="createAccountForm">
          <div v-if="error != null">
-            <span style="color:red;" > Échec de la conncetion</span>
+            <span style="color:red;font-size:25px;" > Login failed</span>
         </div>
         <div v-if="response != null">
-            <span> Connection Réussie</span>
+            <span style="color:green;font-size:35px;"> Login successful! </span>
         </div>
         <form @submit.prevent="validateAndSend" v-else>
             <ul>
+                
                 <li>
                     <label class=" form__label" for="registrationForm_Login">Login :</label>
                     <input v-model="login"  type="text" class="form__control " id="registrationForm_Login" name="Login" >
@@ -42,7 +43,6 @@
 <script>
 import FilmService from '@/services/FilmService.js';
     export default {
-     
         data() {
             return {
                 login: '',
@@ -52,7 +52,7 @@ import FilmService from '@/services/FilmService.js';
                 error: null,
                 validationErrors: [],
             }
-        },   
+        },
         methods: {
             validateAndSend(){
                 this.error = null;
@@ -64,10 +64,25 @@ import FilmService from '@/services/FilmService.js';
                     FilmService.userLogin(data)
                     .then(response => {
                     this.response = response.data;
+                    this.addResponseToStorage();
                     })
                     .catch(error => {
                     this.error = error;
                     });
+                   
+                        
+                }
+                
+                
+            },
+            addResponseToStorage(){
+                if(this.response.token != null){
+                    localStorage.setItem('roleId',this.response.role_id); 
+                    localStorage.setItem('token',this.response.token);
+                    localStorage.setItem('id',this.response.id);
+                    setTimeout(function(){
+                        window.location.href = localStorage.getItem('backURL');
+                    }, 4000)
                 }
             },
             validateData() {

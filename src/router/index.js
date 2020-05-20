@@ -44,6 +44,7 @@ Vue.use(VueRouter)
     path: '/users/Login',
     name: 'Login',
     component: Login,
+    props: true,
       
   },
 ]

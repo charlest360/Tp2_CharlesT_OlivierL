@@ -1,5 +1,6 @@
 <template>
   <div class="page">
+          
         <buttons-menu />
         <search-bar />
         
@@ -26,7 +27,7 @@ export default {
   components: {
     HomeMoviesList,
     ButtonsMenu,
-    SearchBar
+    SearchBar,
   },
   data() {
     return {
@@ -34,7 +35,14 @@ export default {
       error: null,
       filterName : '',
       isClicked : false,
-      isLoggedIn : false
+      isLoggedIn : false,
+      connection :[]
+    }
+  },
+  mounted () {
+    if(localStorage.getItem('token')!= null){
+      this.connection[0] = localStorage.getItem('roleId');
+      this.connection[1] = localStorage.getItem('token'); 
     }
   },
   created () {

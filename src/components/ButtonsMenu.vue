@@ -1,10 +1,11 @@
 <template>
     <div class ="buttonMenu">
           <div class="connectionButtons">
-            <button id="signupButton" class="static" v-bind:class='{ hidden: isLoggedIn}'  @click="profile('signUp')"> Sign up</button>
-            <button id="loginButton" class="static" v-bind:class='{ hidden: isLoggedIn}'  @click="login()"> Login</button>
-            <button id="profileButton" class="static" v-bind:class='{ hidden: isLoggedIn ==false}'  @click="profile('profile')"> Profile</button>
-            <button id="logoutButton" class="static" v-bind:class='{ hidden: isLoggedIn ==false}'  @click="login"> Logout</button>
+            
+            <button id="signupButton" class="static" v-bind:class='{ hidden: loggedIn}'  @click="profile('signUp')"> Sign up</button>
+            <button id="loginButton" class="static" v-bind:class='{ hidden: loggedIn}'  @click="login()"> Login</button>
+            <button id="profileButton" class="static" v-bind:class='{ hidden: loggedIn ==false}'  @click="profile('profile')"> Profile</button>
+            <button id="logoutButton" class="static" v-bind:class='{ hidden: loggedIn ==false}'  @click="login"> Logout</button>
           </div>
         </div>
 </template>
@@ -13,16 +14,34 @@
 export default {
   data() {
     return {
-      isLoggedIn : false
+    token : null,
+     loggedIn : false,
+    }
+  },
+  mounted () {
+     this.token = localStorage.getItem('token') || 0;
+  },
+  watch: {
+    token: function() {
+      if(this.token != 0) {
+        this.loggedIn = true;
+      }
+      else {
+        this.loggedIn = false;
+      }
     }
   },
   methods: {
     login(){
-      if(this.isLoggedIn == true){
-        this.isLoggedIn =false;
-      }
+        if(this.token != 0){
+          localStorage.removeItem('token');
+          localStorage.removeItem('roleId');
+          localStorage.removeItem('id');
+          localStorage.removeItem('backURL');
+          this.token = 0; 
+        }
       else {
-        this.isLoggedIn = true
+        localStorage.setItem('backURL',window.location.href)
         this.$router.push('/users/Login');
         this.$router.go();
       }
