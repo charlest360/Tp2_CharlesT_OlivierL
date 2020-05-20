@@ -38,6 +38,11 @@
                         </li>
                     </ul>
                 </section>
+                <section >
+                    <add-critic v-if="loggedIn == true" :filmId="id"/>
+                    <h2 v-else>Log in to add a critic </h2>
+                </section>
+                
             </div>
          
         </section>
@@ -57,6 +62,7 @@ import FilmRanking from '@/components/FilmRanking.vue';
 import FilmLength from '@/components/FilmLength.vue';
 import ButtonsMenu from '@/components/ButtonsMenu.vue';
 import SearchBar from '@/components/SearchBar.vue';
+import addCritic from '@/components/addCritic.vue';
     export default {
         components: {
             FilmActors,
@@ -68,7 +74,8 @@ import SearchBar from '@/components/SearchBar.vue';
             FilmRanking,
             FilmLength,
             ButtonsMenu,
-            SearchBar
+            SearchBar,
+            addCritic
         },
         props: {
             id: {
@@ -80,7 +87,8 @@ import SearchBar from '@/components/SearchBar.vue';
             return {
                 filmData: null,
                 filterName : '',
-                isClicked : false
+                isClicked : false,
+                loggedIn : false,
             }
         },
         watch: {
@@ -90,6 +98,17 @@ import SearchBar from '@/components/SearchBar.vue';
         },
         created () {
             this.getFilmInfos();
+        },
+        mounted () {
+            this.token = localStorage.getItem('token') || 0;
+            this.id = localStorage.getItem('id') || 0;
+            this.roleId = localStorage.getItem('roleId') || 0;
+            if(this.token != 0) {
+                this.loggedIn = true;
+             }
+             else {
+                this.loggedIn = false;
+            }
         },
         computed: {
             loading() {

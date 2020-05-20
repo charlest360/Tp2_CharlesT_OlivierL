@@ -67,9 +67,18 @@ const apiFilms = axios.create({
           Authorization: 'Bearer '+token
         }
       })
-      
-      
       return apiFilmToken.get('/users/'+id) ;
+    },
+    addCritic(data,token) {
+      let apiFilmToken = axios.create({  
+        baseURL: `http://radiant-plains-67953.herokuapp.com/api`,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer '+token
+        }
+      })
+      return apiFilmToken.post('/films/'+data.film_id+'/critics',data) ;
     },
 
 

@@ -45,10 +45,8 @@ export default {
           localStorage.removeItem('roleId');
           localStorage.removeItem('id');
           localStorage.removeItem('backURL');
-          this.token = 0; 
-          this.roleId =0;
-          this.username = 0;
-          this.id = 0;
+          localStorage.removeItem('username');
+          this.$router.go(0);
         }
       else {
         localStorage.setItem('backURL',window.location.href)
