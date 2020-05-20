@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       token : null,
-      id : null,
+      user_id : null,
       roleId : null,
       username : null,
       loggedIn : false,
@@ -24,7 +24,7 @@ export default {
   },
   mounted () {
      this.token = localStorage.getItem('token') || 0;
-     this.id = localStorage.getItem('id') || 0;
+     this.user_id = localStorage.getItem('user_id') || 0;
      this.roleId = localStorage.getItem('roleId') || 0;
      this.username = localStorage.getItem('username') || 0;
   },
@@ -43,7 +43,7 @@ export default {
         if(this.token != 0){
           localStorage.removeItem('token');
           localStorage.removeItem('roleId');
-          localStorage.removeItem('id');
+          localStorage.removeItem('user_id');
           localStorage.removeItem('backURL');
           localStorage.removeItem('username');
           this.$router.go(0);

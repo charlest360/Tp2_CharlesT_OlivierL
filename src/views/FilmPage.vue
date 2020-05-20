@@ -88,6 +88,8 @@ import addCritic from '@/components/addCritic.vue';
                 filmData: null,
                 filterName : '',
                 isClicked : false,
+                token : null,
+                roleId : null,
                 loggedIn : false,
             }
         },
@@ -101,7 +103,6 @@ import addCritic from '@/components/addCritic.vue';
         },
         mounted () {
             this.token = localStorage.getItem('token') || 0;
-            this.id = localStorage.getItem('id') || 0;
             this.roleId = localStorage.getItem('roleId') || 0;
             if(this.token != 0) {
                 this.loggedIn = true;

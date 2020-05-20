@@ -2,10 +2,12 @@
     
     <div class="reviewForm">
         <div v-if="error != null">
-            <span style="color:red;font-size:25px;" > Failed to add the review</span>
+            <span v-if="hasCritic == true" style="color:red;font-size:25px;" > Failed to edit the review</span>
+            <span v-if="hasCritic == false" style="color:red;font-size:25px;" > Failed to add the review</span>
         </div>
         <div v-if="response != null">
-            <span style="color:green;font-size:35px;"> Review added with success </span>
+            <span v-if="hasCritic == true" style="color:green;font-size:35px;">Review edited with success</span>
+            <span v-if="hasCritic == false" style="color:green;font-size:35px;"> Review added with success </span>
         </div>
         <div v-else>
              <h2>My Review :</h2>
@@ -62,25 +64,52 @@
                 response: null,
                 error: null,
                 validationErrors: [],
+                filmCritics : null,
+                hasCritic : false,
+                criticId : null,
             }
+        },
+        created () {
+            this.getMovieReviews();
+        },
+        watch: {
+            filmCritics: function() {
+                if(this.filmCritics != null) {
+                    this.checkIfUserHasCritic();
+                }
+            },
         },
         methods: {
             validateAndSend() {
                 this.error = null;
                 if(this.validateData() == true){
                     let data = {
-                        user_id : localStorage.getItem('id'),
+                        user_id : localStorage.getItem('user_id'),
                         film_id : this.filmId,
                         score : this.rating,
                         comment : this.comment,
+                        criticId : this.criticId
                     }
-                    FilmService.addCritic(data,localStorage.getItem('token'))
-                    .then(response => {
-                    this.response = response.data;
-                    })
-                    .catch(error => {
-                    this.error = error;
-                    });
+                    if(this.hasCritic ==true){
+                        FilmService.editCritic(data,localStorage.getItem('token'))
+                        .then(response => {
+                        this.response = response.data;
+                        })
+                        .catch(error => {
+                        this.error = error;
+                        });
+                        
+                    }
+                    else{
+                        FilmService.addCritic(data,localStorage.getItem('token'))
+                        .then(response => {
+                        this.response = response.data;
+                        })
+                        .catch(error => {
+                        this.error = error;
+                        });
+                        }
+                    
                 }
             },
             validateData(){
@@ -91,8 +120,30 @@
                 }
                 return true;
             },
-        },
+            getMovieReviews() {
+                FilmService.getFilmById(this.filmId)
+                .then(response => {
+                this.filmCritics = response.data.critic;
+                })
+                .catch(error => {
+                this.error = error;
+                })
+                this.checkIfUserHasCritic();
+            },
+            checkIfUserHasCritic(){
+                for(let i =0;i < this.filmCritics.length;i++){
+                    if(this.filmCritics[i].user_id.toString() == localStorage.getItem('user_id')){
+                        this.rating = parseFloat(this.filmCritics[i].score);
+                        this.comment = this.filmCritics[i].comment;    
+                        this.hasCritic = true;
+                        this.criticId = this.filmCritics[i].id;
+                        break;     
+                }
+                
+            }
         
+        },
+        }
     }
 </script>
 
