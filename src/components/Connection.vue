@@ -80,6 +80,7 @@ import FilmService from '@/services/FilmService.js';
                     localStorage.setItem('roleId',this.response.role_id); 
                     localStorage.setItem('token',this.response.token);
                     localStorage.setItem('id',this.response.id);
+                    localStorage.setItem('username',this.login);
                     setTimeout(function(){
                         window.location.href = localStorage.getItem('backURL');
                     }, 4000)

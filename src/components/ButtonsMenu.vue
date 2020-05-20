@@ -4,7 +4,8 @@
             
             <button id="signupButton" class="static" v-bind:class='{ hidden: loggedIn}'  @click="profile('signUp')"> Sign up</button>
             <button id="loginButton" class="static" v-bind:class='{ hidden: loggedIn}'  @click="login()"> Login</button>
-            <button id="profileButton" class="static" v-bind:class='{ hidden: loggedIn ==false}'  @click="profile('profile')"> Profile</button>
+            <span style="font-size:20px;color:black;font-weight:bold;" v-if="username != 0" > Welcome {{username}} !!!</span>
+            <button id="profileButton" class="static" v-bind:class='{ hidden: loggedIn ==false}'  @click="profile('profile')"> 's Profile</button>
             <button id="logoutButton" class="static" v-bind:class='{ hidden: loggedIn ==false}'  @click="login"> Logout</button>
           </div>
         </div>
@@ -14,12 +15,18 @@
 export default {
   data() {
     return {
-    token : null,
-     loggedIn : false,
+      token : null,
+      id : null,
+      roleId : null,
+      username : null,
+      loggedIn : false,
     }
   },
   mounted () {
      this.token = localStorage.getItem('token') || 0;
+     this.id = localStorage.getItem('id') || 0;
+     this.roleId = localStorage.getItem('roleId') || 0;
+     this.username = localStorage.getItem('username') || 0;
   },
   watch: {
     token: function() {
@@ -39,6 +46,9 @@ export default {
           localStorage.removeItem('id');
           localStorage.removeItem('backURL');
           this.token = 0; 
+          this.roleId =0;
+          this.username = 0;
+          this.id = 0;
         }
       else {
         localStorage.setItem('backURL',window.location.href)
@@ -62,6 +72,7 @@ export default {
     padding-top: 15px;
     background-color: #E6B91E;
     width:100%;
+     overflow:hidden;
   }
   #loginButton{
     
@@ -88,6 +99,8 @@ export default {
     font-weight: bold;
     color: #E6B91E;
     background-color: black;
+    float:  left;
+    overflow:hidden;
     
   }
   #profileButton{
@@ -95,6 +108,9 @@ export default {
     font-weight: bold;
     color: #E6B91E;
     background-color: black;
+    float:  left;
+    overflow:hidden;
+   
   }
   .hidden {
     display: none;
