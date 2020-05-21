@@ -2,47 +2,45 @@
     
     <div class="reviewForm">
         <div v-if="error != null">
-            <span v-if="hasCritic == true" style="color:red;font-size:25px;" > Failed to edit the review</span>
-            <span v-if="hasCritic == false" style="color:red;font-size:25px;" > Failed to add the review</span>
+            <span class="error" v-if="hasCritic == true"  > Failed to edit the review</span>
+            <span class="error" v-if="hasCritic == false"  > Failed to add the review</span>
         </div>
-        <div v-if="response != null">
-            <span v-if="hasCritic == true" style="color:green;font-size:35px;">Review edited with success</span>
-            <span v-if="hasCritic == false" style="color:green;font-size:35px;"> Review added with success </span>
+        <div v-else-if="response != null">
+            <span class="response" v-if="hasCritic == true" >Review edited with success</span>
+            <span class="response" v-if="hasCritic == false" > Review added with success </span>
         </div>
         <div v-else>
              <h2>My Review :</h2>
         
-         <form @submit.prevent="validateAndSend" >
-            <div class='ratingDiv'>
-                <span > Ranking : </span>
-                <star-rating id="rating"
-                    v-model="rating"           
-                    v-bind:increment="0.5"
-                    v-bind:max-rating="5"
-                    inactive-color="#dbdbdb"
-                    active-color="#cc1166"
-                    v-bind:star-size="20"
-                    border-color="fcdc6d"
-                /> 
-            </div>
+            <form @submit.prevent="validateAndSend" >
+                <div class='ratingDiv'>
+                    <span > Ranking : </span>
+                    <star-rating id="rating"
+                        v-model="rating"           
+                        v-bind:increment="0.5"
+                        v-bind:max-rating="5"
+                        inactive-color="#dbdbdb"
+                        active-color="#cc1166"
+                        v-bind:star-size="20"
+                        border-color="fcdc6d"
+                    /> 
+                </div>
              
-            <div class="commentDiv">
-                <textarea  v-model="comment"   id="commentInput" rows="4" cols="50 " placeholder="Comment your review"/>
+                <div class="commentDiv">
+                    <textarea  v-model="comment"   id="commentInput" rows="4" cols="50 " placeholder="Comment your review"/>
                 
-            </div>
-            <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'comment' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
-            </div>
-             <button v-if="hasCritic == true"  id="submitButton" >
-                        Edit Review
-            </button>
-             <button v-if="hasCritic == false"  id="submitButton" >
+                </div>
+                <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'comment' "> 
+                    <span class="validationError">{{validationErrors[0].message}} </span>
+                </div>
+                <button v-if="hasCritic == true"  id="submitButton" >
+                    Edit Review
+                </button>
+                <button v-if="hasCritic == false"  id="submitButton" >
                         Add Review
-            </button>
-        </form>
+                </button>
+            </form>
         </div>
-       
-        
     </div>
 </template>
 
@@ -100,8 +98,7 @@
                         })
                         .catch(error => {
                         this.error = error;
-                        });
-                        
+                        }); 
                     }
                     else{
                         FilmService.addCritic(data,localStorage.getItem('token'))
@@ -111,7 +108,7 @@
                         .catch(error => {
                         this.error = error;
                         });
-                        }
+                    }
                     
                 }
             },
@@ -119,6 +116,7 @@
                 this.validationErrors = [];
                 if(this.comment == ''){
                     this.validationErrors.push({type:'comment',message:'Comment field is required.'});
+                    return false;
                 }
                 if(this.comment.length > 250){
                     this.validationErrors.push({type:'comment',message:'Comment field can hold a max of 250 characters.'});
@@ -144,11 +142,9 @@
                         this.hasCritic = true;
                         this.criticId = this.filmCritics[i].id;
                         break;     
+                    }     
                 }
-                
-            }
-        
-        },
+            },
         }
     }
 </script>
@@ -168,7 +164,6 @@
     font-size:20px;
 }
 .reviewForm{
-    
     padding-top: 10px;
     padding-bottom :40px;
     text-align: center;
@@ -185,22 +180,29 @@
     margin: auto;
     display: inline-block;
 }
-    #submitButton {
-        margin-top: 20px ;
-        width: 50%;
-        font-size: 20px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        font-weight: bold;
-        color: #E6B91E;
-        background-color: black;
-        
-    }
-    .hidden {
-        display: none;
-    }
-    .error {
-        float: left;
-    }
+#submitButton {
+    margin-top: 20px ;
+    width: 50%;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    color: #E6B91E;
+    background-color: black;   
+}
+.hidden {
+    display: none;
+}
+.error {
+    color: red;
+    font-size: 35px;
+}
+.response{
+    color:green;
+    font-size: 35px;
+}
+.validationError{
+    color: red;
+}
    
 </style>

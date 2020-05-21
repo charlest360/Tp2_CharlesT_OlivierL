@@ -14,7 +14,7 @@
             
           </div>
           <div class="userSpanDiv">
-              <span style="font-size:20px;color:black;font-weight:bold;" v-if="username != 0" > Welcome {{username}} !!!</span>
+              <span v-if="username != 0" > Welcome {{username}} !!!</span>
             </div>
         </div>
 </template>
@@ -89,6 +89,9 @@ export default {
     background-color: #E6B91E;
     padding-top: 20px;
     padding-bottom: 10px;
+    font-size:20px;
+    color:black;
+    font-weight:bold;
   }
   #loginButton{
     

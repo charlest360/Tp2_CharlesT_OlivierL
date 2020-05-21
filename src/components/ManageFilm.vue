@@ -2,16 +2,16 @@
     <div>
         <h1>Manage a movie</h1>
         <div v-if="error != null && action == 'edit'">
-             <span>Error editing the movie: {{error}}</span>
+             <span class="error">Error editing the movie: {{error}}</span>
         </div>
         <div v-else-if="error != null && action == 'delete'">
-             <span>Error editing the movie: {{error}}</span>
+             <span class="error">Error editing the movie: {{error}}</span>
         </div>
         <div v-else-if="response != null && action == 'edit'">
-            <span> Movie edited with success </span>
+            <span class="response"> Movie edited with success </span>
         </div>
         <div v-else-if="response != null && action == 'delete'">
-            <span> Movie deleted with success </span>
+            <span  class="response"> Movie deleted with success </span>
         </div>
         <div class="addMovieForm" v-else>
             <form @submit.prevent="validateAndSend" >
@@ -21,7 +21,7 @@
                     <input v-model="movieId"   type="number" class="form__control " id="registrationForm_id" name="id" >
                 </li>
                 <div v-if=" filmIdError != null"> 
-                    <span style="color:red;">Film not found </span>
+                    <span class="validationError">Film not found </span>
                 </div>
                 
                 <li>
@@ -29,7 +29,7 @@
                     <input v-model="title"  maxlength="50" minlength="2" type="text" class="form__control " id="registrationForm_title" name="title" >
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'title' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                    <span class="validationError">{{validationErrors[0].message}} </span>
                 </div>
 
                 
@@ -38,7 +38,7 @@
                     <input v-model="release_year" maxlength="4" minlength="4"  type="text" class="form__control " id="registrationForm_Release_yeard" name="Release_year" autocomplete="off">
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'release_year' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                    <span class="validationError">{{validationErrors[0].message}} </span>
                 </div>
 
                  
@@ -49,7 +49,7 @@
                     <input v-model="length" min="1" max="999" type="number" class="form__control " id="registrationForm_Length" name="Length" autocomplete="off">
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'length' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                    <span class="validationError">{{validationErrors[0].message}} </span>
                 </div>
                 
                 <li class="radioLi">
@@ -61,7 +61,7 @@
                     
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'rating' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                    <span class="validationError">{{validationErrors[0].message}} </span>
                 </div>
 
 
@@ -70,7 +70,7 @@
                     <textarea class="form__control" v-model="description" name="Description"  placeholder="Add a movie description" min="5"  cols="10" rows="5"></textarea>
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'description' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                    <span class="validationError">{{validationErrors[0].message}} </span>
                 </div>
 
 
@@ -83,7 +83,7 @@
                     
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'language' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                    <span class="validationError">{{validationErrors[0].message}} </span>
                 </div>
                 
                 <li>
@@ -91,7 +91,7 @@
                     <input v-model="special_features" type="text" class="form__control "  max="200" id="registrationForm_Special_Features" name="special_features" >
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'special_features' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                    <span class="validationError">{{validationErrors[0].message}} </span>
                 </div>
 
                 
@@ -417,5 +417,16 @@ import FilmService from '@/services/FilmService.js';
         margin-top: 40px;
         text-align: center;
         width: 100%;
+    }
+    .error {
+        color: red;
+        font-size: 35px;
+    }
+    .response{
+        color:green;
+        font-size: 35px;
+    }
+    .validationError{
+        color: red;
     }
 </style>

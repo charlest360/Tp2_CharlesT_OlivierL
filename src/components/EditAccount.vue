@@ -1,10 +1,10 @@
 <template>
     <div class="createAccountForm">
         <div v-if="error != null">
-             <span>Erreur : {{error}}</span>
+             <span class="error">Erreur : {{error}}</span>
         </div>
-        <div v-if="response != null">
-            <span> Account edited!</span>
+        <div v-else-if="response != null">
+            <span class="response"> Account edited!</span>
         </div>
         <form @submit.prevent="validateAndSend" v-else>
             <ul>           
@@ -14,7 +14,7 @@
                     <input v-model="lastName" type="text" class="form__control " id="registrationForm_Last_Name" name="lastName" >
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'lastName' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                    <span class="validationError">{{validationErrors[0].message}} </span>
                 </div>
                 
                 <li>
@@ -22,7 +22,7 @@
                     <input v-model="firstName" type="text" class="form__control " id="registrationForm_First_Name" name="firstName" >
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'firstName' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                    <span class="validationError">{{validationErrors[0].message}} </span>
                 </div>
                 
                 <li>
@@ -30,7 +30,7 @@
                     <input v-model="password" type="password" class="form__control " id="registrationForm_Password" name="Password" autocomplete="off">
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'password' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                    <span class="validationError">{{validationErrors[0].message}} </span>
                 </div>
 
 
@@ -39,16 +39,16 @@
                     <input v-model="confirmPassword" type="password" class="form__control " id="registrationForm_ConfirmPassword" name="Password" autocomplete="off">
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'confirmPassword' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                    <span class="validationError">{{validationErrors[0].message}} </span>
                 </div>
                 
                 
                 <li>
                     <label class=" form__label" for="registrationForm_Email">Email :</label>
-                    <input v-model="email" type="text" class="form__control " id="registrationForm_Email" name="Email">
+                    <input v-model="email" type="email" class="form__control " id="registrationForm_Email" name="Email">
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'email' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                    <span class="validationError">{{validationErrors[0].message}} </span>
                 </div>
                 
 
@@ -258,7 +258,15 @@ import FilmService from '@/services/FilmService.js';
         display: none;
     }
     .error {
-        float: left;
+        color: red;
+        font-size: 35px;
+    }
+    .response{
+        color:green;
+        font-size: 35px;
+    }
+    .validationError{
+        color: red;
     }
     
 </style>

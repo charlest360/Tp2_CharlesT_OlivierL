@@ -1,10 +1,10 @@
 <template>
     <div class="createAccountForm">
          <div v-if="error != null">
-            <span style="color:red;font-size:25px;" > Login failed</span>
+            <span class="error" > Login failed</span>
         </div>
-        <div v-if="response != null">
-            <span style="color:green;font-size:35px;"> Login successful! </span>
+        <div v-else-if="response != null">
+            <span class="response"> Login successful! </span>
         </div>
         <form @submit.prevent="validateAndSend" v-else>
             <ul>
@@ -14,7 +14,7 @@
                     <input v-model="login"  type="text" class="form__control " id="registrationForm_Login" name="Login" >
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'login' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                    <span class="validationError">{{validationErrors[0].message}} </span>
                 </div>
 
                 
@@ -23,7 +23,7 @@
                     <input v-model="password" type="password" class="form__control " id="registrationForm_Password" name="Password" autocomplete="off">
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'password' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                    <span class="validationError">{{validationErrors[0].message}} </span>
                 </div>
 
                 <li>
@@ -164,7 +164,16 @@ import FilmService from '@/services/FilmService.js';
         display: none;
     }
     .error {
-        float: left;
+        color: red;
+        font-size: 35px;
     }
+    .response{
+        color:green;
+        font-size: 35px;
+    }
+    .validationError{
+        color: red;
+    }
+
     
 </style>

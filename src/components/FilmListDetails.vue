@@ -30,7 +30,7 @@
 <script>
 import FilmService from '@/services/FilmService.js';
 import StarRating from '@/components/StarRating.vue';
-    export default {s
+    export default {
         components: {
             StarRating,
         props: {
