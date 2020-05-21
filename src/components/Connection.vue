@@ -20,7 +20,7 @@
                 
                 <li>
                     <label class=" form__label" for="registrationForm_Password">Password :</label>
-                    <input v-model="password" type="text" class="form__control " id="registrationForm_Password" name="Password" autocomplete="off">
+                    <input v-model="password" type="password" class="form__control " id="registrationForm_Password" name="Password" autocomplete="off">
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'password' "> 
                     <span style="color:red;">{{validationErrors[0].message}} </span>
