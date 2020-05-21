@@ -23,6 +23,9 @@
                 <div v-if=" filmIdError != null"> 
                     <span class="validationError">Film not found </span>
                 </div>
+               <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'movieId' "> 
+                    <span class="validationError">{{validationErrors[0].message}} </span>
+                </div>
                 
                 <li>
                     <label class=" form__label" for="registrationForm_title">Title :</label>
@@ -179,7 +182,7 @@ import FilmService from '@/services/FilmService.js';
                 this.special_features ='';
             },
             validateAndSend(){
-                if(this.validateData() == true){
+                if(this.validateData() == true && this.filmIdError ==null){
                     if(this.action == 'edit'){
                         let data = {
                             title: this.title,
@@ -212,7 +215,8 @@ import FilmService from '@/services/FilmService.js';
             },
             validateData() {
                 this.validationErrors = [];
-                if (this.validateTitle() ==true &&
+                if (this.validateId() ==true &&
+                this.validateTitle() ==true &&
                 this.validateReleaseYear() ==true &&
                 this.validateLength() &&
                 this.validateRating()== true &&
@@ -226,6 +230,13 @@ import FilmService from '@/services/FilmService.js';
                 else{
                     return false;
                 }
+            },
+            validateId(){
+                if(this.movieId == null || this.movieId == ''){
+                    this.validationErrors.push({type:'movieId',message:'movieId must be filled'});
+                    return false;
+                }
+                return true;
             },
             
             validateTitle(){
