@@ -33,6 +33,7 @@ import StarRating from '@/components/StarRating.vue';
     export default {
         components: {
             StarRating,
+        },
         props: {
             filmId: {
                 type: Number,
@@ -102,14 +103,14 @@ import StarRating from '@/components/StarRating.vue';
         },
     
 
+    
     }
 </script>
 
 <style scoped>
-    ul
-{
+    ul{
     list-style-type:none;
     padding:0px;
     margin:0px;
-}
+    }
 </style>
