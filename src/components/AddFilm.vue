@@ -3,10 +3,10 @@
         <h1>Add a movie to our database</h1>
 
          <div v-if="error != null">
-             <span>Erreur : {{error}}</span>
+             <span>Error : {{error}}</span>
         </div>
-        <div v-if="response != null && response == 'abracadabra'">
-            <span> Account created!</span>
+        <div v-if="response != null ">
+            <span> Movie added To Database</span>
         </div>
         <div class="addMovieForm" v-else>
             <form @submit.prevent="validateAndSend" >
@@ -38,16 +38,7 @@
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'length' "> 
                     <span style="color:red;">{{validationErrors[0].message}} </span>
                 </div>
-
-                <li>
-                     <span class=" form__label"> Decription :</span>
-                    <textarea class="form__control" v-model="description" name="Description"  placeholder="Add a movie description" min="5"  cols="10" rows="5"></textarea>
-                </li>
-                <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'description' "> 
-                    <span style="color:red;">{{validationErrors[0].message}} </span>
-                </div>
-
-              
+                
                 <li class="radioLi">
                     <span class="form__label">Rating :</span> 
                     <div class="radioDiv" v-for="ratingType in ratingTypes" :key="ratingType.id">
@@ -57,6 +48,28 @@
                     
                 </li>
                 <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'rating' "> 
+                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                </div>
+
+
+                <li>
+                     <span class=" form__label"> Decription :</span>
+                    <textarea class="form__control" v-model="description" name="Description"  placeholder="Add a movie description" min="5"  cols="10" rows="5"></textarea>
+                </li>
+                <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'description' "> 
+                    <span style="color:red;">{{validationErrors[0].message}} </span>
+                </div>
+
+
+                <li class="radioLi">
+                    <span class="form__label">Language :</span> 
+                    <div class="radioDiv" v-for="language in languages" :key="language.id">
+                        <input   v-model="language_id"  class="radioButt " type="radio" :id="language.id" :name="language.name" :value="language.id">
+                        <label  class=" radioLabel" :for="language.id"> {{language.name}}</label>
+                    </div>
+                    
+                </li>
+                <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'language' "> 
                     <span style="color:red;">{{validationErrors[0].message}} </span>
                 </div>
                 
@@ -73,7 +86,7 @@
 
                 
                 <li class="submitButtonLi">
-                    <button @click="validateAndSend" id="submitButton" >
+                    <button  id="submitButton" >
                         Add movie to database
                     </button>
                 </li>
@@ -102,10 +115,15 @@
                 error : null,
                 response : null,
                 ratingTypes : null,
+                languages: null,
+                currentYear : null,
             }
         },
         created(){
+            var today = new Date();
+            this.currentYear = parseInt(today.getFullYear());
             this.getRatingTypes();
+            this.getLanguages();
         }  ,    
         methods: {
             validateAndSend(){
@@ -117,7 +135,7 @@
                         description: this.description,
                         rating: this.rating,
                         special_features: this.special_features,
-                        language_id: 1
+                        language_id: parseInt(this.language_id)
                     }
                     FilmService.addMovie(data,localStorage.getItem('token'))
                     .then(response => {
@@ -133,8 +151,8 @@
                 if (this.validateTitle() ==true &&
                 this.validateReleaseYear() ==true &&
                 this.validateLength() &&
-                this.validateDescription() == true && 
                 this.validateRating()== true &&
+                this.validateDescription() == true && 
                 this.validateLanguage() == true&&
                 this.validateSpecialFeatures() == true
                 ) 
@@ -167,6 +185,10 @@
                     return false;
                 }else if(isNaN(this.release_year)) {
                     this.validationErrors.push({type:'release_year',message:'release_year field must be numbers only'});
+                    return false;
+                }
+                else if(this.release_year < this.currentYear) {
+                    this.validationErrors.push({type:'release_year',message:'release_year cant be anterior to the current year'});
                     return false;
                 }
                 return true;
@@ -210,14 +232,14 @@
             },
             validateLanguage(){
                 if(this.language == ''){
-                    this.validationErrors.push({type:'language',message:'Last name field is required'});
+                    this.validationErrors.push({type:'language',message:':anguage field is required'});
                     return false;
                 }
                 return true;
             },
-            validateSpecialFeatures(){
-                if(this.special_features.length > 200 ) {
-                    this.validationErrors.push({type:'image',message:'The special_features field must be 200 characters maximum'});
+             validateSpecialFeatures(){
+                if(this.special_features != null && this.special_features.length > 200 ) {
+                    this.validationErrors.push({type:'special_features',message:'The special_features field must be 200 characters maximum'});
                     return false;
                 } 
                 return true;
@@ -226,6 +248,15 @@
                 FilmService.getRatingTypes()
                 .then(response => {
                     this.ratingTypes = response.data;
+                })
+                .catch(error => {
+                    this.error = error;
+                });
+            },
+            getLanguages(){
+                FilmService.getLanguages()
+                .then(response => {
+                    this.languages = response.data;
                 })
                 .catch(error => {
                     this.error = error;
@@ -288,15 +319,10 @@
         text-align: left;
     }
     .radioDiv{
-        width: 10%;
+        width: 20%;
         display: inline-block;
     }
-    .radioButt{
-        
-    }
-    .radioLabel{
 
-    }
     #registrationForm_Description{
         margin-left: 0%;
     }

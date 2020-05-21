@@ -104,7 +104,32 @@ const apiFilms = axios.create({
       })
       return apiFilmToken.post('/films',data); 
     },
+    editMovie(id,data,token){
+      let apiFilmToken = axios.create({  
+        baseURL: `http://radiant-plains-67953.herokuapp.com/api`,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer '+token
+        }
+      })
+      return apiFilmToken.put('/films/'+id,data); 
+    },
+    deleteMovie(id,token){
+      let apiFilmToken = axios.create({  
+        baseURL: `http://radiant-plains-67953.herokuapp.com/api`,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer '+token
+        }
+      })
+      return apiFilmToken.delete('/films/'+id); 
+    },
     getRatingTypes(){
       return apiFilms.get('/ratings');
+    },
+    getLanguages(){
+      return apiFilms.get('/languages');
     }
   }

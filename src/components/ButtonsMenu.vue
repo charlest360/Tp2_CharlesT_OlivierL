@@ -4,11 +4,18 @@
             
             <button id="signupButton" class="static" v-bind:class='{ hidden: loggedIn}'  @click="profile('signUp')"> Sign up</button>
             <button id="loginButton" class="static" v-bind:class='{ hidden: loggedIn}'  @click="login()"> Login</button>
-            <span style="font-size:20px;color:black;font-weight:bold;" v-if="username != 0" > Welcome {{username}} !!!</span>
-            <button id="profileButton" class="static" v-bind:class='{ hidden: loggedIn ==false}'  @click="profile('profile')"> Edit profile</button>
+            
             <button id="addMovieButton" class="static" v-if="roleId == 1"  @click="adminSection('addMovie')"> Add movie</button>
+            <button id="manageMovieButton" class="static" v-if="roleId == 1"  @click="adminSection('manageMovie')"> Manage movie</button>
+            
+            
+            <button id="profileButton" class="static" v-bind:class='{ hidden: loggedIn ==false}'  @click="profile('profile')"> Edit profile</button>
             <button id="logoutButton" class="static" v-bind:class='{ hidden: loggedIn ==false}'  @click="login"> Logout</button>
+            
           </div>
+          <div class="userSpanDiv">
+              <span style="font-size:20px;color:black;font-weight:bold;" v-if="username != 0" > Welcome {{username}} !!!</span>
+            </div>
         </div>
 </template>
 
@@ -62,7 +69,7 @@ export default {
       this.$router.go();       
     },
     adminSection(action){
-      this.$router.push('/adminSection/'+action);
+      this.$router.push('/adminSection/'+action+'/'+'none');
     }
   },
 }
@@ -75,33 +82,37 @@ export default {
     background-color: #E6B91E;
     width:100%;
      overflow:hidden;
+     text-align: right;
+  }
+  .userSpanDiv{
+    text-align: center;
+    background-color: #E6B91E;
+    padding-top: 20px;
+    padding-bottom: 10px;
   }
   #loginButton{
     
     
-    float: right;
     width: 8%;
     padding: 10px 40px 10px 40px;
     font-weight: bold;
     color: #E6B91E;
     background-color: black;
+    margin-left: 40px;
   }
   #logoutButton{
-
-    
-    float: right;
     width: 8%;
     padding: 10px 40px 10px 40px;
     font-weight: bold;
     color: #E6B91E;
     background-color: black;
+    margin-left: 40px;
   }
   #signupButton{
     padding: 10px 40px 10px 40px;
     font-weight: bold;
     color: #E6B91E;
     background-color: black;
-    float:  left;
     overflow:hidden;
     
   }
@@ -110,9 +121,24 @@ export default {
     font-weight: bold;
     color: #E6B91E;
     background-color: black;
-    float:  left;
     overflow:hidden;
+    margin-left: 40px;
    
+  }
+  #addMovieButton{
+    width: 10%;
+    padding: 10px 40px 10px 40px;
+    font-weight: bold;
+    color: #E6B91E;
+    background-color: black;
+  }
+  #manageMovieButton{
+    width: 10%;
+    padding: 10px 40px 10px 40px;
+    font-weight: bold;
+    color: #E6B91E;
+    background-color: black;
+    margin-left: 40px;
   }
   .hidden {
     display: none;

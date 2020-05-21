@@ -48,7 +48,7 @@ Vue.use(VueRouter)
       
   },
   {
-    path: '/adminSection/:adminAction',
+    path: '/adminSection/:adminAction/:filmId',
     name: 'AdminSection',
     component: AdminSection,
     props: true,

@@ -64,7 +64,7 @@
                 </div>
                 
                 <li>
-                    <button @click="validateAndSend" id="submitButton" >
+                    <button  id="submitButton" >
                         Create account
                     </button>
                 </li>

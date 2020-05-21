@@ -33,10 +33,10 @@
             <div v-if="validationErrors.length >= 1 && validationErrors[0].type == 'comment' "> 
                     <span style="color:red;">{{validationErrors[0].message}} </span>
             </div>
-             <button v-if="hasCritic == true" @click="validateAndSend" id="submitButton" >
+             <button v-if="hasCritic == true"  id="submitButton" >
                         Edit Review
             </button>
-             <button v-if="hasCritic == false" @click="validateAndSend" id="submitButton" >
+             <button v-if="hasCritic == false"  id="submitButton" >
                         Add Review
             </button>
         </form>

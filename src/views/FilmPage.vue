@@ -38,7 +38,7 @@
                         </li>
                     </ul>
                     
-                    <button class="editButton" v-if="roleId ==1">
+                    <button class="editButton" v-if="roleId ==1" @click="manageMovie()">
                         Edit movie's page 
                     </button>
                 
@@ -161,6 +161,9 @@ import CommentSection from '@/components/CommentSection.vue';
                     this.isClicked = true;
                 }
             },
+            manageMovie(){
+                this.$router.push('/adminSection/manageMovie/'+this.filmData.film.id);
+            }
             
         },
     }

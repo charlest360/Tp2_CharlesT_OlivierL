@@ -55,7 +55,7 @@
          
                 
                 <li>
-                    <button @click="validateAndSend" id="submitButton" >
+                    <button  id="submitButton" >
                         Edit account
                     </button>
                 </li>
@@ -120,7 +120,7 @@ import FilmService from '@/services/FilmService.js';
                         role_id : this.role_id,
                         login : this.login
                     }
-                    FilmService.editUser(localStorage.getItem('id'),data,localStorage.getItem('token'))
+                    FilmService.editUser(localStorage.getItem('user_id'),data,localStorage.getItem('token'))
                     .then(response => {
                     this.response = response.data;
                     })
@@ -128,7 +128,7 @@ import FilmService from '@/services/FilmService.js';
                     this.error = error;
                     });
 
-                    FilmService.editUserPassword(localStorage.getItem('id'),data,localStorage.getItem('token'))
+                    FilmService.editUserPassword(localStorage.getItem('user_id'),data,localStorage.getItem('token'))
                     .then(response => {
                     this.response = response.data;
                     })

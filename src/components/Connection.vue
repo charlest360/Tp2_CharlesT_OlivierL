@@ -27,7 +27,7 @@
                 </div>
 
                 <li>
-                    <button @click="validateAndSend" id="submitButton" >
+                    <button  id="submitButton" >
                         Log in
                     </button>
                 </li>
