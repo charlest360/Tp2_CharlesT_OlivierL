@@ -96,7 +96,7 @@ import FilmService from '@/services/FilmService.js';
               
         methods: {
             getUserInfos(){
-                FilmService.getUserInfos(localStorage.getItem('id'),localStorage.getItem('token'))
+                FilmService.getUserInfos(localStorage.getItem('user_id'),localStorage.getItem('token'))
                     .then(response => {
                     this.userInfos = response.data.user;
                     this.email = this.userInfos.email;

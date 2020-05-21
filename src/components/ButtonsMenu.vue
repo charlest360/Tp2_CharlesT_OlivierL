@@ -6,6 +6,7 @@
             <button id="loginButton" class="static" v-bind:class='{ hidden: loggedIn}'  @click="login()"> Login</button>
             <span style="font-size:20px;color:black;font-weight:bold;" v-if="username != 0" > Welcome {{username}} !!!</span>
             <button id="profileButton" class="static" v-bind:class='{ hidden: loggedIn ==false}'  @click="profile('profile')"> Edit profile</button>
+            <button id="addMovieButton" class="static" v-if="roleId == 1"  @click="adminSection('addMovie')"> Add movie</button>
             <button id="logoutButton" class="static" v-bind:class='{ hidden: loggedIn ==false}'  @click="login"> Logout</button>
           </div>
         </div>
@@ -60,6 +61,9 @@ export default {
       this.$router.push('/users/profile/'+button);
       this.$router.go();       
     },
+    adminSection(action){
+      this.$router.push('/adminSection/'+action);
+    }
   },
 }
 </script>

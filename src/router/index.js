@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import FilmPage from '../views/FilmPage.vue';
 import Account from '../views/Account.vue';
 import Login from '../views/Login.vue';
+import AdminSection from '../views/AdminSection.vue';
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,12 @@ Vue.use(VueRouter)
     path: '/users/Login',
     name: 'Login',
     component: Login,
+      
+  },
+  {
+    path: '/adminSection/:adminAction',
+    name: 'AdminSection',
+    component: AdminSection,
     props: true,
       
   },

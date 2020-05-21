@@ -9,8 +9,6 @@ const apiFilms = axios.create({
   })
   
 
-  
-
   export default {
     getFilms() {
       return apiFilms.get('/films');
@@ -95,5 +93,18 @@ const apiFilms = axios.create({
       return apiFilmToken.put('/films/'+data.film_id+'/critics/'+data.criticId,data) ;
     },
 
-
+    addMovie(data,token){
+      let apiFilmToken = axios.create({  
+        baseURL: `http://radiant-plains-67953.herokuapp.com/api`,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer '+token
+        }
+      })
+      return apiFilmToken.post('/films',data); 
+    },
+    getRatingTypes(){
+      return apiFilms.get('/ratings');
+    }
   }

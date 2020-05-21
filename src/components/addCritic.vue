@@ -121,7 +121,7 @@
                     this.validationErrors.push({type:'comment',message:'Comment field is required.'});
                 }
                 if(this.comment.length > 250){
-                    this.validationErrors.push({type:'comment',message:'Comment field can hold a max of 250 caracters.'});
+                    this.validationErrors.push({type:'comment',message:'Comment field can hold a max of 250 characters.'});
                     return false;
                 }
                 return true;

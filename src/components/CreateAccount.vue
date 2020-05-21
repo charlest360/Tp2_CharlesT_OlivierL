@@ -190,7 +190,7 @@ import FilmService from '@/services/FilmService.js';
                     return false;
                 }
                 else if(this.email.length < 8 || this.email.length > 50) {
-                    this.validationErrors.push({type:'email',message:'Please enter a valid email address '});
+                    this.validationErrors.push({type:'email',message:'Please enter a valid email address (between 8 and 50 characters ) '});
                     return false;
                 }
                 return true;
