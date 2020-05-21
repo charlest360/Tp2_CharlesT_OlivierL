@@ -37,11 +37,18 @@
                             <film-actors :filmId="filmData.film.id"  /> 
                         </li>
                     </ul>
+                    
+                    <button class="editButton" v-if="roleId ==1">
+                        Edit movie's page 
+                    </button>
+                
                 </section>
+                
                 <section >
                     <add-critic v-if="loggedIn == true" :filmId="id"/>
                     <h2 v-else>Log in to add a critic </h2>
                 </section>
+               
                 <section >
                     <h2>Users reviews</h2>
                     <comment-section :filmId="id" />
@@ -153,12 +160,19 @@ import CommentSection from '@/components/CommentSection.vue';
                 else {
                     this.isClicked = true;
                 }
-            }
+            },
+            
         },
     }
 </script>
 
 <style scoped>
+.editButton{
+    padding: 10px 40px 10px 40px;
+    font-weight: bold;
+    color: #E6B91E;
+    background-color: black;
+}
 .filmData {
     width : 70%;
     margin: auto;
