@@ -23,7 +23,6 @@
                     active-color="#cc1166"
                     v-bind:star-size="20"
                     border-color="fcdc6d"
-                    :rating="criticsAverage" 
                 /> 
             </div>
              
@@ -91,9 +90,10 @@
                         film_id : this.filmId,
                         score : this.rating,
                         comment : this.comment,
-                        criticId : this.criticId
+                        
                     }
                     if(this.hasCritic ==true){
+                        data.criticId = this.criticId;
                         FilmService.editCritic(data,localStorage.getItem('token'))
                         .then(response => {
                         this.response = response.data;
@@ -117,7 +117,10 @@
             },
             validateData(){
                 this.validationErrors = [];
-                if(this.comment != '' && this.comment.length > 250){
+                if(this.comment == ''){
+                    this.validationErrors.push({type:'comment',message:'Comment field is required.'});
+                }
+                if(this.comment.length > 250){
                     this.validationErrors.push({type:'comment',message:'Comment field can hold a max of 250 caracters.'});
                     return false;
                 }

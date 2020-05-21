@@ -84,7 +84,7 @@ import FilmService from '@/services/FilmService.js';
                         for (i = 0; i < this.nbOfCritics; i++) {
                             this.criticsAverage+= parseFloat( this.filmCritics[i].score);
                         }
-                        this.criticsAverage = Math.round(((this.criticsAverage/this.nbOfCritics)*100)/20*1) /100; //division par 20 pour ramener sur 5
+                        this.criticsAverage = Math.round(((this.criticsAverage/this.nbOfCritics)*100)) /100; //division par 20 pour ramener sur 5
                     }
                     else {
                         this.criticsAverage = 0;

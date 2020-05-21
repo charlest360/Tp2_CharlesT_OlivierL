@@ -42,6 +42,11 @@
                     <add-critic v-if="loggedIn == true" :filmId="id"/>
                     <h2 v-else>Log in to add a critic </h2>
                 </section>
+                <section >
+                    <h2>Users reviews</h2>
+                    <comment-section :filmId="id" />
+                    
+                </section>
                 
             </div>
          
@@ -63,6 +68,7 @@ import FilmLength from '@/components/FilmLength.vue';
 import ButtonsMenu from '@/components/ButtonsMenu.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import addCritic from '@/components/addCritic.vue';
+import CommentSection from '@/components/CommentSection.vue';
     export default {
         components: {
             FilmActors,
@@ -75,7 +81,8 @@ import addCritic from '@/components/addCritic.vue';
             FilmLength,
             ButtonsMenu,
             SearchBar,
-            addCritic
+            addCritic,
+            CommentSection
         },
         props: {
             id: {
